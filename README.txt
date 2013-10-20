@@ -1,4 +1,4 @@
-README.txt -- stage2-2 contains optimized version via stage2, CRB, Sep 14, 2013
+README.txt -- stage2-2 contains optimized version via stage2, CRB, Oct 19, 2013
 
 The purpose of this directory is to provide an optimized version of stage2
 implemented using the facilities of the first version of stage2 obtained from
@@ -53,5 +53,21 @@ to x86 assembly language by:
 or, as you can see examining makefile, by running stage2 from the command line:
    stage2 flb2yasm.s2m - <stage2.flb stg2.asm
 
+stg2.o
+The Stage 2 object file output from the yasm assembler. See stage2.o in the
+stage2-1 directory.
+
+stg2.lst
+The Stage 2 assembler listing file. See stage2.lst in stage2-1.
+
+stg2
+This is the optimized Stage 2 executable. It is slightly smaller and faster
+than the unoptimized version produced in the stage2-1 directory. Note the
+difference in spelling of the two executable versions: stage2 (unoptimized) is
+used to produce stg2, the optimized version. My benchmark testing showed that
+the optimized version was only two percent or less faster, and that is likely
+becausee stg2 is about ten percent smaller and consequently loads faster. In
+any case, the optimized stg2 is the one you would probably want to keep in
+your local bin directory for application use.
 
 
