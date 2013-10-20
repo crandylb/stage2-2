@@ -1,0 +1,411 @@
+.'$'0 (+-*/)	flb2yasm.s2m -- Packed flb macros for stage2, CRB, Sep 7, 2013
+BEGIN '.
+; BEGIN '10$
+	global	progr$
+	global	R0,R1,R2,R3,R4,R5,R6,R7,R8,R9$
+	global	RA,RB,RC,RD,RE,RF,RG,RH,RI,RJ,RK,RL,RM$
+	global	RN,RO,RP,RQ,RR,RS,RT,RU,RV,RR,RX,RY,RZ,list$
+	extern	LBR,LBW,LINE,MB$
+	extern	exit,iwrch,iread,iwrite,icntl,iprnt,ioop$
+	section	.data$
+R0:	dw	0$
+	dw	0,0$
+R1:	dw	1$
+	dw	1,1$
+R2:	dw	2$
+	dw	2,2$
+R3:	dw	3$
+	dw	3,3$
+R4:	dw	0$
+	dw	4,0$
+R5:	dw	10$
+	dw	5,0$
+R6:	dw	0$
+	dw	6,0$
+R7:	dw	4$
+	dw	7,0$
+R8:	dw	0$
+	dw	8,0$
+R9:	dw	listend-list$
+	dw	9,0$
+RA:	dw	0,0,0$
+RB:	dw	0,0,0$
+RC:	dw	0,0,0$
+RD:	dw	0,0,0$
+RE:	dw	0,0,0$
+RF:	dw	0,0,0$
+RG:	dw	0,0,0$
+RH:	dw	0,0,0$
+RI:	dw	0,0,0$
+RJ:	dw	0,0,0$
+RK:	dw	0,0,0$
+RL:	dw	0,0,0$
+RM:	dw	0,0,0$
+RN:	dw	0,0,0$
+RO:	dw	0,0,0$
+RP:	dw	0,0,0$
+RQ:	dw	0,0,0$
+RR:	dw	0,0,0$
+RS:	dw	0,0,0$
+RT:	dw	0,0,0$
+RU:	dw	0,0,0$
+RV:	dw	0,0,0$
+RW:	dw	0,0,0$
+RX:	dw	0,0,0$
+RY:	dw	0,0,0$
+RZ:	dw	0,0,0$
+	section	.bss$
+list:	resw	16380$
+listend:$
+	section	.text$
+progr:$
+	push	EBP$
+	mov	EBP,ESP$
+$
+STOP.
+; STOP$
+	xor	EAX,EAX$
+	mov	[ESP],EAX$
+	call	exit$
+	xor	EAX,EAX$
+;	leave$
+	ret$
+$
+END PROGRAM.
+; END PROGRAM$
+	end$
+'F0$
+$
+FLG ' = '.
+; FLG '10 = '20$
+YFET FLG '20$
+YSTO FLG '10$
+$
+VAL ' = PTR '.
+; VAL '10 = PTR '20$
+YFET PTR '20$
+YSTO VAL '10$
+$
+PTR ' = VAL '.
+; PTR '10 = VAL '20$
+YFET VAL '20$
+YSTO PTR '10$
+$
+TO ' IF ' ' = '.
+; TO '10 IF '20 '30 = '40$
+YFET '20 '30$
+YCMP '20 '40$
+	jz	L'10$
+$
+TO ' IF ' ' NE '.
+; TO '10 IF '20 '30 NE '40$
+YFET '20 '30$
+YCMP '20 '40$
+	jnz	L'10$
+$
+TO ' IF ' ' GE '.
+; TO '10 IF '20 '30 GE '40$
+YFET '20 '30$
+YCMP '20 '40$
+	jge	L'10$
+$
+TO ' IF ' ' LT '.
+; TO '10 IF '20 '30 LT '40$
+YFET '20 '30$
+YCMP '20 '40$
+	jlt	L'10$
+$
+' ' = ' + 0.
+; '10 '20 = '30 + 0$
+'10 '20 = '30$
+$
+' ' = ' ' '.
+; '10 '20 = '30 '40 '50$
+YFET '10 '30$
+Y'40 '10 '50$
+YSTO '10 '20$
+$
+' ' = ' + 1.
+; '10 '20 = '30 + 1$
+-IF '20='30 SKIP 4$
+YFET '10 '30$
+X+ =1$
+YSTO '10 '20$
+'F9$
+AC'46$
+-IF '41-='10'30 SKIP 1$
+-LET AC=$
+-IF '10=PTR SKIP 2$
+	inc	word [R'20+2]$
+'F9$
+	inc	word [R'20]$
+$
+' ' = ' - 1.
+; '10 '20 = '30 - 1$
+-IF '20='30 SKIP 4$
+YFET '10 '30$
+X- =1$
+YSTO '10 '20$
+'F9$
+AC'46$
+-IF '41-='10'30 SKIP 1$
+-LET AC=$
+-IF '10=PTR SKIP 2$
+	dec	word [R'20+2]$
+'F9$
+	dec	word [R'20]$
+$
+' ' = '.
+YFET '10 '30$
+YSTO '10 '20$
+$
+GET ' = '.
+; GET '10 = '20$
+YFET PTR '20$
+	cwde$
+	add	EAX,list$
+	mov	EBX,EAX$
+	mov	AX,[EBX]$
+	mov	[R'10],AX$
+	mov	AX,[EBX+2]$
+	mov	DX,AX$
+	and	DX,3$
+	mov	[R'10+4],DX$
+	sar	AX,2$
+YSTO VAL '10$
+$
+STO ' = '.
+; STO '10 = '20$
+YFET PTR '10$
+	cwde$
+	add	EAX,list$
+	mov	EBX,EAX$
+-IF '20-=0 SKIP 2$
+	xor	EAX,EAX$
+-SKIP 14$
+-IF '20-=1 SKIP 2$
+	mov	EAX,0x50001$
+-SKIP 11$
+-IF '20-=2 SKIP 2$
+	mov	EAX,0xA0002$
+-SKIP 8$
+-IF '20-=3 SKIP 2$
+	mov	EAX,0xF0003$
+-SKIP 5$
+	mov	AX,[R'20+2]$
+	sal	AX,2$
+	or	AX,[R'20+4]$
+	sal	EAX,16$
+	mov	AX,[R'20]$
+	mov	[EBX],EAX$
+-LET AC=$
+$
+READ NEXT '.
+; READ NEXT '10$
+YFET VAL '10$
+	cwde$
+	mov	[ESP],EAX$
+	call	iread$
+YSTO FLG '10$
+$
+WRITE NEXT '.
+; WRITE NEXT '10$
+YFET VAL '10$
+	cwde$
+	mov	[ESP],EAX$
+	call	iwrite$
+YSTO FLG '10$
+$
+REWIND '.
+; REWIND '10$
+YFET VAL '10$
+	cwde$
+	mov	[ESP],EAX$
+	call	icntl$
+YSTO FLG '10$
+$
+VAL ' = CHAR.
+; VAL '10 = CHAR$
+	mov	EBX,[LBR]$
+	mov	AL,[LINE+EBX]$
+	cbw$
+	inc	EBX$
+	mov	[LBR],EBX$
+YSTO VAL '10$
+$
+CHAR = VAL '.
+; CHAR = VAL '10$
+YFET VAL '10$
+	cwde$
+	mov	[ESP],EAX$
+	call	iwrch$
+YSTO FLG '10$
+$
+MESSAGE ' TO '.
+; MESSAGE '10 TO '20$
+	mov	EBX,MB$
+	mov	dword [EBX+10],"'10"$
+YFET VAL '20$
+	cwde$
+	mov	[ESP],EAX$
+	call	iprnt$
+YSTO FLG '20$
+$
+LOC '.
+; LOC '10$
+L'10:$
+-LET AC=$
+$
+TO '.
+; TO '10$
+	jmp	L'10$
+$
+TO ' BY '.
+; TO '10 BY '20$
+	mov	EAX,G'00$
+	sub	EAX,progr$
+YSTO PTR '20$
+	jmp	L'10$
+G'00:$
+-LET AC=$
+$
+RETURN BY '.
+; RETURN BY '10$
+YFET PTR '10$
+	cwde$
+	add	EAX,progr$
+	jmp	EAX$
+-LET AC=$
+$ -----
+XFET =0.			the X layer maps accumulator ops to machine instructions
+	xor	AX,AX$
+$
+XFET ='.
+	mov	AX,'10$
+$
+XFET '.
+	mov	AX,[R'10]$
+$
+XSTO '.
+	mov	[R'10],AX$
+$
+X+ =1.
+	inc	AX$
+$
+X+ ='.
+	add	AX,'10$
+$
+X+ '.
+	add	AX,[R'10]$
+$
+X- =1.
+	dec	AX$
+$
+X- ='.
+	sub	AX,'10$
+$
+X- '.
+	sub	AX,[R'10]$
+$
+X* =4.
+	sal	AX,2$
+$
+X* '.
+	imul	word [R'10]$
+$
+X/ =4.
+	sar	AX,2$
+$
+X/ '.
+	cwd$
+	idiv	word [R'10]$
+$
+XCMP =0.
+	or	AX,AX$
+$
+XCMP ='.
+	cmp	AX,'10$
+$
+XCMP '.
+	cmp	AX,[R'10]$
+$
+YFET ' '.			the Y layer is used to suppress redundant fetches
+AC'36$
+-IF '31='10'20 SKIP 1$
+ZFET '10 '20$
+-LET AC='10'20$
+$
+YSTO ' '.
+ZSTO '10 '20$
+-LET AC='10'20$
+$
+YCMP ' '.
+ZCMP '10 '20$
+$
+Y' ' '.
+Z'10 '20 '30$
+-LET AC=$
+$ -----				the Z layer maps register fields to accumulator
+Z' PTR 5.
+X'10 =10$
+$
+Z* PTR 5.
+X* 5$
+$
+Z/ PTR 5.
+X/ 5$
+$
+Z' PTR 7.
+X'10 =4$
+$
+Z' PTR '.			use immediate operand for PTR 0..3
+'20'870123$
+-IF '80= SKIP 2$
+X'10 '20$
+'F9$
+X'10 ='20$
+$
+Z' VAL '.			use immediate operand for VAL 0..9
+'20'870123456789$
+-IF '80= SKIP 2$
+X'10 '20+2$
+'F9$
+X'10 ='20$
+$
+Z' FLG '.			use immediate operand for FLG 0..3
+'20'870123$
+-IF '80= SKIP 2$
+X'10 '20+4$
+'F9$
+X'10 ='20$
+$ -----
+; '.				output all comments directly
+; '10'F1$
+$ ----- Stage2 system macros -----
+-IF '=' SKIP '.	        compare string equality
+'F50$
+$
+-IF '-=' SKIP '.	compare string inequality
+'F51$
+$
+-IF ' EQ ' SKIP '.	compare arithmetic equality
+'F60$
+$
+-IF ' NE ' SKIP '.	compare arithmetic inequality
+'F61$
+$
+-IF ' GT ' SKIP '.	compare arithmetic greater
+'F6+$
+$
+-IF ' LT ' SKIP '.	compare arithmetic less than
+'F6-$
+$
+-SKIP '.		skip count lines
+'F4$
+$
+-LET '='.		set p1 to p2 as string in symbol table
+'F3$
+$
+-SET '='.		evaluate p2 arithmetically and set p1
+'24'26 'F3$
+$$
