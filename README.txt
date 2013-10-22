@@ -1,4 +1,4 @@
-README.txt -- stage2-2 contains optimized version via stage2, CRB, Oct 19, 2013
+README.txt -- stage2-2 contains optimized version via stage2, CRB, Oct 21, 2013
 
 The purpose of this directory is to provide an optimized version of stage2
 implemented using the facilities of the first version of stage2 obtained from
@@ -34,16 +34,16 @@ stg2 copy grandios.o from the grandios repository.
 debug
 A makefile to build a version of stage2 with symbolic debugging infomation
 included for use by GNU gdb or the graphical interface ddd. To build the debug
-version use w commnd line such as:
+version use a commnd line such as:
 	make -f debug stg2
 To make this version of stg2 copy grandios.dbug.o from the grandios
-repository. Note that this will overwrite the provided files stg2.o, stg2.asm, 
-and stg2.lst as well as the executable stg2.
+repository. Note that this will overwrite the provided files stg2.asm, and 
+stg2.lst.
 
 flb2yasm.s2m
 This file contains the macros for Stage 2 to translate flb to x86 assembly
-language for the yasm assemblerand applies optimizations to eliminate
-redundant instructions and use immediate operands rather than constants
+language for the yasm assembler. It applies optimizations to eliminate
+redundant instructions and uses immediate operands rather than constants
 preloaded in the flb registers.
 
 stg2.asm
@@ -70,4 +70,10 @@ becausee stg2 is about ten percent smaller and consequently loads faster. In
 any case, the optimized stg2 is the one you would probably want to keep in
 your local bin directory for application use.
 
-
+What You Need
+The following are not included here but may be obtained as described below:
+stage2.flb -- the Stage 2 source code file (see the stage2-1 repo)
+stage2 --     the Stage 2 executable implemented in the stage2-1 repo
+grandios.o -- compiled object code of the I/O system and wrapper for stage2
+or
+grandios.dbug.o -- compiled object code with debugging symbols
