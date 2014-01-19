@@ -1,4 +1,5 @@
 README.txt -- stage2-2 contains optimized version via stage2, CRB, Oct 21, 2013
+01/19/2014 CRB Add LICENSE
 
 The purpose of this directory is to provide an optimized version of stage2
 implemented using the facilities of the first version of stage2 obtained from
@@ -21,6 +22,7 @@ stg2.asm --  	 stage2 translated to x86 assembly language by stage2
 stg2.o --	 assembled object code for stage2 from yasm assembler
 stg2.lst --	 yasm listing file for stg2.asm, useful for debugging
 stg2 --	 	 optimized stage2 executable linked with grandios via gcc
+LICENSE		 GPLv2
 
 README.txt
 Describes the contents of this directory and how its contents can be used.
@@ -69,6 +71,9 @@ the optimized version was only two percent or less faster, and that is likely
 becausee stg2 is about ten percent smaller and consequently loads faster. In
 any case, the optimized stg2 is the one you would probably want to keep in
 your local bin directory for application use.
+
+LICENSE
+The GNU general public license applies to all files written by me.
 
 What You Need
 The following are not included here but may be obtained as described below:
